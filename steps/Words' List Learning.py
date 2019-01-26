@@ -15,7 +15,7 @@ def given_create_words(context):
     context.words = []
     context.action = True
 
-@given("assistant failed to save a set of words")
+@when("assistant failed to save a set of words because of recognition error")
 def given_create_words(context):
     context.words = []
 
@@ -192,3 +192,7 @@ def assistant_cancels_task(context, task):
 @then("assistant postpones a reminder to a selected {time}")
 def assistant_postpones_task(context, time):
     context.reminder_time = time
+
+@then("assistant confirms that the task was done")
+def assistant_confirms_task(context):
+    context.task_confirmed = True

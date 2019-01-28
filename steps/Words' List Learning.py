@@ -99,7 +99,7 @@ def when_user_names_words(context):
 
 @when("user says {message}")
 def when_user_says_message(context, message):
-    context.request = message
+    context.request = message.lower()
     if not hasattr(context, 'words'):
         context.words = []
     context.wish_title = False
@@ -138,10 +138,10 @@ def reminder_alarm(context):
 
 @then("assistant says {message}")
 def assistant_says(context, message):
-    if context.request == "Add words to learn":
+    if context.request == "add words to learn":
         context.reply = "Name the words"
         # print(context.request + ' ' + context.reply)
-    if context.words is not None:
+    if context.words:
         reply = ""
         for word in context.words:
             reply += word + " "
@@ -157,6 +157,8 @@ def assistant_says(context, message):
     if context.reminder_alarm:
         context.reply = "It’s time to learn the set"
         # print(context.reply)
+    else:
+        print("\nASSISTANT REPLIES: " + context.reply)
 
 @then("assistant asks {message}")
 def assistant_asks(context, message):
